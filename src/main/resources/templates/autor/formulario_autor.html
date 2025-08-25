@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Actor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:replace="layout/layout :: header"></header>
+
+<!--
+Resumen
+- Este formulario sirve para crear o editar un autor.
+- Si el objeto autor ya tiene id, se edita; si no, se crea uno nuevo.
+- Thymeleaf con th:object y th:field hace que los datos se mapeen automáticamente al modelo en Spring Boot.-->
+
+<!--
+container
+    → clase de Bootstrap para centrar contenido y agregar márgenes laterales.
+mt-5
+    → margen superior grande para separar del borde superior de la página.
+-->
+<div class="container mt-5" >
+    <h2>Formulario de Autor</h2>
+    <!-- Cuando utilizamos el  th:object="${autor}" tenemos que usar el  th:field="*{id}"-->
+    <!-- Si NO utilizamos el th:object="${autor}" tenemos que usar el th:value="${autor.id}"-->
+<!--
+th:action="@{/autores/guardar}"
+    → define la URL a la que se enviará el formulario (POST).
+th:object="${autor}"
+    → vincula el formulario al objeto autor del modelo.
+method="post"
+    → indica que se enviará por POST.
+-->
+    <form th:action="@{/autores/guardar}" th:object="${autor}" method="post" >
+<!--
+- Campo invisible para el id del autor.
+- Útil cuando se está editando un autor existente.
+- Thymeleaf se encarga de poner el valor del id automáticamente.
+-->
+        <input type="hidden" th:field="*{id}" >
+
+<!--
+form-group
+    → grupo de formulario con margen interno de Bootstrap.
+label
+    → etiqueta visual para el input.
+th:field="*{nombre}"
+    → Thymeleaf vincula este campo con la propiedad nombre del objeto autor.
+class="form-control"
+    → estilo de Bootstrap para input de texto.
+-->
+        <div class="form-group">
+            <label for="nombre" >Nombre: </label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}">
+        </div>
+
+<!--
+Botón azul de Bootstrap que envía el formulario al servidor.
+-->
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+
+
+<footer th:replace="layout/layout :: footer"></footer>
+
+
+
+</body>
+</html>

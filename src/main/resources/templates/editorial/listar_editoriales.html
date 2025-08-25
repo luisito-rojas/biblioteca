@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Listado de editoriales</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+<body>
+
+<header th:replace="layout/layout :: header"></header>
+
+<!--
+- Este código genera un listado de editoriales en una tabla estilizada con Bootstrap.
+- Muestra id y nombre.
+- Cada fila tiene botones para mostrar, listar libros, editar y eliminar.
+- Al final, hay un botón para agregar una nueva editorial.
+-->
+<!--
+container: centra y da márgenes al contenido.
+mt-5: margen superior amplio.
+mb-4: margen inferior en el título.
+text-dark: texto oscuro.
+-->
+<div class="container mt-5">
+  <h2 class="mb-4 text-dark">🏢 Listado de Editoriales</h2>
+<!--
+- table-responsive: hace que la tabla sea desplazable en pantallas pequeñas.
+- shadow-sm: sombra ligera alrededor.
+- rounded: esquinas redondeadas.
+- table: clase base de Bootstrap.
+- table-sm: filas más compactas.
+- table-hover: resalta la fila al pasar el mouse.
+- table-striped: filas con rayas alternadas.
+- table-borderless: sin bordes visibles.
+- align-middle: centra el contenido verticalmente.
+-->
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-sm table-hover table-striped table-borderless align-middle">
+<!--
+- bg-dark text-white: encabezado con fondo negro y texto blanco.
+- scope="col": mejora accesibilidad (indica que es cabecera de columna).
+- Última columna está centrada.
+-->
+      <thead class="bg-dark text-white">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col" class="text-center">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+<!--
+- th:each="editorial : ${editoriales}": recorre la lista editoriales que el controlador pasó al modelo.
+- Por cada editorial, genera una fila <tr>.
+- th:text="${editorial.id}": imprime el ID.
+- th:text="${editorial.nombre}": imprime el nombre.
+-->
+      <tr th:each="editorial : ${editoriales}">
+        <td th:text="${editorial.id}"></td>
+        <td th:text="${editorial.nombre}"></td>
+<!--
+- Cada botón es un enlace dinámico que genera una URL con el id de la editorial:
+    * Mostrar → /editoriales/{id} → muestra detalles de la editorial.
+    * Libros → /editoriales/{id}/libros → lista libros de esa editorial.
+    * Editar → /editoriales/{id}/editar → abre formulario para editar.
+    * Eliminar → /editoriales/{id}/eliminar → elimina la editorial (con confirmación en JavaScript).
+- Todos tienen estilos de Bootstrap:
+    * btn-outline-primary (azul),
+    * btn-outline-info (celeste),
+    * btn-outline-warning (amarillo),
+    * btn-outline-danger (rojo).
+-->
+
+        <td class="text-center">
+          <a th:href="@{'/editoriales/' + ${editorial.id}}"
+             class="btn btn-outline-primary btn-sm mr-2">Mostrar
+          </a>
+
+          <a th:href="@{'/editoriales/' + ${editorial.id} + '/libros'}"
+             class="btn btn-outline-info btn-sm mr-2">Libros
+          </a>
+
+          <a th:href="@{'/editoriales/' + ${editorial.id} + '/editar'}"
+             class="btn btn-outline-warning btn-sm mr-2">Editar
+          </a>
+
+          <a th:href="@{'/editoriales/' + ${editorial.id} + '/eliminar'}"
+             class="btn btn-outline-danger btn-sm"
+             onclick="return confirm('¿Seguro que deseas eliminar esta editorial?')">Eliminar
+          </a>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<!--
+Redirige a un formulario para crear una nueva editorial.
+btn btn-success: botón verde.
+mt-3: margen superior.
+-->
+  <a href="/editoriales/nuevo" class="btn btn-success mt-3">➕ Agregar Editorial</a>
+</div>
+
+
+<!-- footer -->
+<footer th:replace="layout/layout :: footer"></footer>
+
+
+</body>
+</html>

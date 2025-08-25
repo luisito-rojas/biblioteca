@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantilla</title>
+</head>
+<body>
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Inicio Biblioteca</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/autores/">Autores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/libros/">Libros</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/categorias/">Categorias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/editoriales/">Editoriales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/acerca_de">Acerca de...</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <div class="container-fluid">
+            <!-- Texto principal -->
+            <p class="mb-1">&copy; 2025 Biblioteca. Todos los derechos reservados.</p>
+
+            <!-- Links -->
+            <p class="mb-2">
+                <a href="/" class="text-light text-decoration-none">Inicio</a> |
+                <a href="/acerca_de" class="text-light text-decoration-none">Acerca de</a>
+            </p>
+
+            <!-- Tus datos -->
+            <div class="small">
+                <p class="mb-0">Desarrollado por <strong> I.S.C Luis Armando Rojas Salazar</strong> </p>
+                <p class="mb-0">📧
+                    <a href="mailto:luis.torres.rojas.18@gmail.com" class="text-light">luis.torres.rojas.18@gmail.com</a>
+                </p>
+                <p class="mb-0">
+                    🌐
+                    <a href="https://github.com/luisito-rojas" target="_blank" class="text-light">GitHub</a> |
+                    <a href="https://www.linkedin.com/in/luis-rojas-2aba9018a" target="_blank" class="text-light">LinkedIn</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+</body>
+</html>

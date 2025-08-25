@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acerca de - Biblioteca</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+
+<header th:replace="layout/layout :: header"></header>
+
+<!-- Encabezado llamativo -->
+<div class="jumbotron text-center bg-primary text-white mb-4">
+  <h1 class="display-4">Acerca del Proyecto</h1>
+  <p class="lead">Gestión de Biblioteca con Spring Boot, Bootstrap y Thymeleaf</p>
+</div>
+
+<div class="container">
+  <div class="row">
+    <!-- Información del Proyecto -->
+    <div class="col-md-8 mb-4">
+      <div class="card shadow-lg border-0">
+        <div class="card-body">
+          <h3 class="card-title text-primary">Descripción del Proyecto</h3>
+          <p class="card-text">
+            Este sistema de <strong>Gestión de Biblioteca</strong> fue desarrollado como proyecto académico con el objetivo
+            de administrar libros, autores, editoriales y categorías de manera eficiente.
+            La aplicación está construida con <strong>Spring Boot</strong>, <strong>Thymeleaf</strong>
+            y <strong>Bootstrap 4</strong>, ofreciendo una interfaz moderna y fácil de usar.
+          </p>
+          <!--
+          <p class="card-text">
+            El proyecto también incluye autenticación de usuarios, búsqueda avanzada y paginación
+            para mejorar la experiencia del usuario.
+          </p>
+          -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Información del Autor -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-lg border-0 text-center">
+        <div class="card-body">
+          <h4 class="card-title text-primary">Desarrollado por</h4>
+          <p class="card-text mb-1"><strong>I.S.C. Luis Armando Rojas Salazar</strong></p>
+          <p class="card-text mb-1">📧
+            <a href="mailto:luis.torres.rojas.18@gmail.com">luis.torres.rojas.18@gmail.com</a>
+          </p>
+          <p class="card-text">
+            🌐
+            <a href="https://github.com/luisito-rojas" target="_blank">GitHub</a> |
+            <a href="https://www.linkedin.com/in/luis-rojas-2aba9018a" target="_blank">LinkedIn</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nota académica -->
+  <div class="alert alert-info text-center shadow-sm">
+    <strong>Nota:</strong> Este sistema es un proyecto académico y no está destinado a uso comercial.
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-light text-center py-3 mt-4">
+  <div class="container">
+    <p class="mb-1">&copy; 2025 Biblioteca. Todos los derechos reservados.</p>
+    <p class="mb-0">
+      <a href="/" class="text-light text-decoration-none">Inicio</a> |
+      <a href="/acerca_de" class="text-light text-decoration-none">Acerca de</a>
+    </p>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

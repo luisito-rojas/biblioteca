@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Autores</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+          crossorigin="anonymous">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header th:replace="layout/layout :: header"></header>
+
+<!-- Contenido -->
+<!--
+container
+    → centra el contenido y agrega márgenes laterales.
+mt-5
+    → margen superior grande para separar del borde de la página.
+-->
+<div class="container mt-5">
+<!--
+mb-4
+    → margen inferior.
+text-dark
+    → color de texto oscuro.
+-->
+    <h2 class="mb-4 text-dark">📚 Listado de Autores</h2>
+
+<!--
+- table-responsive
+    → permite scroll horizontal en pantallas pequeñas.
+- shadow-sm rounded
+    → agrega sombra ligera y bordes redondeados.
+- table-sm
+    → filas compactas.
+- table-hover
+    → resalta la fila al pasar el mouse.
+- align-middle
+    → centra verticalmente el contenido de las celdas.
+-->
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-sm table-hover align-middle">
+            <thead class="bg-dark text-white">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col" class="text-center">Acciones</th>
+            </tr>
+            </thead>
+<!--
+Fondo negro (bg-dark) y texto blanco (text-white).
+Columnas: ID, Nombre, Acciones.
+text-center en Acciones → centra los botones en esa columna.
+-->
+            <tbody>
+
+<!--
+th:each="autor : ${autores}"
+    → recorre la lista de autores enviada desde el controlador.
+th:text="${autor.id}"
+    → muestra el ID del autor.
+th:text="${autor.nombre}"
+    → muestra el nombre del autor.
+-->
+            <tr th:each="autor : ${autores}">
+                <td th:text="${autor.id}"></td>
+                <td th:text="${autor.nombre}"></td>
+<!--
+Editar
+    → redirige a /autores/editar/{id}.
+Eliminar
+    → redirige a /autores/eliminar/{id} con confirmación en JavaScript.
+Clases Bootstrap:
+btn btn-outline-primary btn-sm
+    → botón azul claro pequeño.
+btn btn-outline-danger btn-sm
+    → botón rojo pequeño.
+mr-2
+    → margen derecho entre botones.
+-->
+                <td class="text-center">
+                    <a th:href="@{/autores/editar/{id}(id=${autor.id})}"
+                       class="btn btn-outline-primary btn-sm mr-2">
+                         Editar
+                    </a>
+                    <a th:href="@{/autores/eliminar/{id}(id=${autor.id})}"
+                       class="btn btn-outline-danger btn-sm mr-2"
+                       onclick="return confirm('¿Seguro que deseas eliminar este autor?')">
+                         Eliminar
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botón agregar -->
+<!--
+Botón verde (btn-success) con margen superior (mt-3).
+Contiene ícono de plus (<i class="fas fa-plus"></i>) para indicar creación.
+Redirige al formulario de creación de un nuevo autor.
+-->
+    <a href="/autores/nuevo" class="btn btn-success mt-3">
+        <i class="fas fa-plus"></i> Agregar Autor
+    </a>
+</div>
+
+<!-- Footer -->
+<footer th:replace="layout/layout :: footer"></footer>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

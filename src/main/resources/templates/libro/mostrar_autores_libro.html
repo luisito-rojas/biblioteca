@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Autores del Libro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+
+<header th:replace="layout/layout :: header"></header>
+
+<!--
+Resumen
+- Este código genera una lista estilizada de autores de un libro.
+- Cada autor es un elemento <li> dentro de un list-group de Bootstrap.
+- La lista se construye dinámicamente con Thymeleaf a partir de la variable ${autores}.
+ -->
+
+<!--
+container
+    → clase de Bootstrap que centra el contenido y da márgenes laterales.
+mt-5
+    → margen superior grande para separar del borde superior de la página.
+-->
+<div class="container mt-5" >
+<!--
+Encabezado que indica qué se está mostrando.
+mb-4 → margen inferior para separar del listado.
+-->
+    <h2 class="mb-4">Autores del Libro</h2>
+<!--
+<ul class="list-group mt-3">
+list-group
+    → clase de Bootstrap que convierte la lista en un grupo visualmente atractivo.
+mt-3
+    → margen superior.
+
+<li th:each="autor : ${autores}" class="list-group-item" th:text="${autor.nombre}"></li>
+th:each="autor : ${autores}"
+    → Thymeleaf recorre la lista de autores enviada desde el backend (model.addAttribute("autores", listaDeAutores)).
+class="list-group-item"
+    → aplica estilos de Bootstrap a cada elemento de la lista.
+th:text="${autor.nombre}"
+    → muestra el nombre de cada autor en la lista.
+-->
+    <ul class="list-group mt-3" >
+        <li th:each="autor : ${autores}" class="list-group-item" th:text="${autor.nombre}"  > </li>
+    </ul>
+</div>
+
+
+<!-- footer -->
+<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

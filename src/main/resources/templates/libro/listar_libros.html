@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Libros</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+
+
+<header th:replace="layout/layout :: header"></header>
+
+<!--
+En resumen:
+Este código muestra una tabla dinámica de libros con Thymeleaf, usando Bootstrap para darle estilo. Tiene un listado
+con acciones (editar, eliminar, ver autores) y un botón para agregar nuevos libros.
+-->
+
+
+<!--
+Usa la clase container de Bootstrap → centra y da márgenes laterales.
+mt-5 → margin-top grande (espacio arriba del contenido).
+-->
+<div class="container mt-5">
+
+<!--
+d-flex justify-content-between align-items-center
+    → coloca los elementos alineados en fila, con espacio entre ellos.
+mb-3
+    → margen inferior.
+text-dark
+    → texto color negro/gris oscuro.
+-->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0 text-dark">📖 Listado de Libros</h2>
+
+    </div>
+
+<!--
+table-responsive
+    → hace la tabla adaptable (scroll horizontal en pantallas pequeñas).
+shadow-sm y rounded
+    → le dan sombra ligera y bordes redondeados.
+table-sm
+    → filas más compactas.
+table-hover
+    → resalta la fila al pasar el mouse.
+table-striped
+    → alterna colores en las filas.
+table-borderless
+    → elimina bordes visibles.
+align-middle
+    → centra verticalmente el contenido de las celdas.
+-->
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-sm table-hover table-striped table-borderless align-middle">
+<!--
+Fila de encabezados con fondo negro (bg-dark) y texto blanco (text-white).
+Define las columnas: ID, Título, Editorial, Categoría y Acciones.
+-->
+            <thead class="bg-dark text-white">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Título</th>
+                <th scope="col">Editorial</th>
+                <th scope="col">Categoría</th>
+                <th scope="col" class="text-center">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+<!--
+th:each="libro: ${libros}" → recorre la lista de libros que el controlador envía al modelo (model.addAttribute("libros", listaLibros)).
+Muestra:
+libro.id
+    → el ID
+libro.titulo
+    → título del libro
+libro.editorial.nombre
+    → nombre de la editorial asociada
+libro.categoria.nombre
+    → nombre de la categoría
+-->
+            <tr th:each="libro: ${libros}">
+                <td th:text="${libro.id}"></td>
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.editorial.nombre}"></td>
+                <td th:text="${libro.categoria.nombre}"></td>
+<!--
+Aquí están los botones de acción:
+Editar
+    → redirige a /libros/{id}/editar.
+Eliminar
+    → redirige a /libros/{id}/eliminar, pero antes lanza un confirm() en JavaScript.
+Ver Autores
+    → redirige a /libros/{id}/autores (para mostrar los autores asociados a ese libro).
+Los botones usan clases de Bootstrap (btn-outline-*) con estilos pequeños (btn-sm).
+-->
+                <td class="text-center">
+                    <a th:href="@{/libros/{id}/editar(id=${libro.id})}"
+                       class="btn btn-outline-primary btn-sm mr-2">
+                         Editar
+                    </a>
+                    <a th:href="@{/libros/{id}/eliminar(id=${libro.id})}"
+                       class="btn btn-outline-danger btn-sm mr-2"
+                       onclick="return confirm('¿Seguro que deseas eliminar este libro?')">
+                        Eliminar
+                    </a>
+                    <a th:href="@{'/libros/' + ${libro.id} + '/autores'}"
+                       class="btn btn-outline-info btn-sm mr-2">
+                       Ver Autores
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<!--
+Botón verde (btn-success) con un ícono ➕.
+mt-3 → espacio superior.
+Redirige al formulario para crear un nuevo libro.
+ -->
+    <a href="/libros/nuevo" class="btn btn-success mt-3">➕ Agregar Libro</a>
+</div>
+
+
+<!-- footer -->
+<footer th:replace="layout/layout :: footer"></footer>
+
+
+</body>
+</html>
